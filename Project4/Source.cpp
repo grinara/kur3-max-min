@@ -12,6 +12,9 @@
 using namespace std;
 void main() {
 	setlocale(LC_ALL, "Russian");
+	cout << "Алфавит" << endl;
+	for (int i = 32; i < 127; i++) { cout << char(i) << " "; }
+	cout << endl;
 	//string key = "abcd";
 	//string text = "exp(A+2)*C=?";
 	int* K1{ new int[256] };
@@ -22,7 +25,7 @@ void main() {
 	int key_str[100] = { 0 };
 	//int key_mtr[10][10] = { 0 };
 	int file_str[100] = { 0 };
-	int p = 5;// размерность строки-ключа
+	//int p = key_tr.size();// размерность строки-ключа
 	int n = 4;//размерность матрицы ключа
 	int k = 0;
 	int m = 97;//количество символов в алфавите
@@ -44,6 +47,7 @@ void main() {
 		if (!cheak_key(key_tr)) { cout << "недопустимый ключ" << endl; }
 		else { break; }
 	}
+	int p = key_tr.size();
 	for (int i = 0; i < key_tr.size(); i++) { key_str[i] = key_tr[i]; }
 	while (fl) {
 		for (int i = 0; i < n; i++) {//формируем блок символов
@@ -62,9 +66,7 @@ void main() {
 			//cout << (char)buff << " ";
 		}
 
-		//for (int i = 0; i < n; i++) { cout << (char)file_str[i] << " "; } cout << endl<<endl;
-		//cout << endl << endl;
-
+		
 		for (int i = 0; i < n; i++) {//формируем матрицу ключ размерности n
 			for (int j = 0; j < n; j++) {
 				key_str[k] = K1[key_str[k]];
@@ -73,7 +75,8 @@ void main() {
 				if (k == p) { k = 0; };
 			}
 		}
-
+		
+		
 		int x = key_mtr[n - 1][n - 1];
 		int y = 1;
 		for (int i = 0; i < n; i++) {
@@ -87,12 +90,7 @@ void main() {
 				//key_mtr[i][j] = key_mtr[i][j] % m;
 			}
 		}
-		//for (int i = 0; i < n; i++) {
-			//for (int j = 0; j < n; j++) {
-			//	cout << key_mtr[i][j] << " ";
-			//}
-		//	cout << endl;
-		//}
+		
 		if (n != 0) {
 			key_mtr = degenerate_matrix(key_mtr, n);//проверяем на вырожденность
 		}
